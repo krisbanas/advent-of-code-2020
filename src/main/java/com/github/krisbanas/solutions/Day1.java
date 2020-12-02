@@ -1,12 +1,11 @@
 package com.github.krisbanas.solutions;
 
-
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static com.github.krisbanas.util.FileHelper.getFileFromResources;
+import static com.github.krisbanas.util.FileHelper.loadFileFromResources;
 
 public class Day1 {
 
@@ -28,7 +27,7 @@ public class Day1 {
     }
 
     private List<Integer> extractNumbersFromInputFile() {
-        return getFileFromResources(INPUT).stream()
+        return loadFileFromResources(INPUT).stream()
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
