@@ -15,4 +15,12 @@ public class FileHelper {
             return Collections.emptyList();
         }
     }
+
+    public static String loadFileFromResourcesAsString(String filename) {
+        try {
+            return Files.readString(Paths.get("src/main/resources/" + filename).toAbsolutePath());
+        } catch (IOException ex) {
+            return "";
+        }
+    }
 }
