@@ -12,7 +12,6 @@ public class Day5 {
 
     public Day5() {
         inputList = FileHelper.loadFileFromResources("Day5Input.txt");
-
     }
 
     public long solve1() {
