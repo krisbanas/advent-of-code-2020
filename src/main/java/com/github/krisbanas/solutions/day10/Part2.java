@@ -1,42 +1,44 @@
-package com.github.krisbanas.solutions;
+package com.github.krisbanas.solutions.day10;
 
 import com.github.krisbanas.util.FileHelper;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Not my best solution...
- */
-public class Part1 {
+
+public class Part2 {
 
     private final List<Integer> adapterList;
-    private int oneCounter;
-    private int threeCounter;
+    private final Map<Integer, Long> waysOfConnecting;
 
-    public Part1() {
+    public Part2() {
         adapterList = FileHelper.loadFileFromResources("Day10Input.txt")
                 .stream()
                 .map(Integer::valueOf)
-                .sorted()
                 .collect(Collectors.toList());
+        waysOfConnecting = new HashMap<>();
+        waysOfConnecting.put(0, 1L);
+        adapterList.add(0);
+        Collections.sort(adapterList);
+        adapterList.add(adapterList.get(adapterList.size() - 1) + 3);
     }
 
-    public int solve() {
-        if (adapterList.get(0) == 1) oneCounter++;
-        if (adapterList.get(0) == 3) threeCounter++;
-
-        for (int i = 0; i < adapterList.size() - 1; i++) {
-            var diff = adapterList.get(i + 1) - adapterList.get(i);
-            if (diff == 1) oneCounter++;
-            if (diff == 3) threeCounter++;
+    public long solve() {
+        for (int joltValue : adapterList) {
+            countNumberOfWaysForJoltValue(joltValue);
         }
-
-        threeCounter++;
-
-        System.out.println("One counter: " + oneCounter + "Three counter: " + threeCounter);
-
-        return oneCounter * threeCounter;
+        return waysOfConnecting.get(adapterList.get(adapterList.size() - 1));
     }
 
+    private void countNumberOfWaysForJoltValue(int joltValue) {
+        if (joltValue == 0) return;
+        var waysOfConnectingForCurrent =
+                waysOfConnecting.getOrDefault(joltValue - 3, 0L) +
+                        waysOfConnecting.getOrDefault(joltValue - 2, 0L) +
+                        waysOfConnecting.getOrDefault(joltValue - 1, 0L);
+        waysOfConnecting.put(joltValue, waysOfConnectingForCurrent);
+    }
 }

@@ -1,13 +1,10 @@
-package com.github.krisbanas.solutions;
+package com.github.krisbanas.solutions.day10;
 
 import com.github.krisbanas.util.FileHelper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Not my best solution...
- */
 public class Part1 {
 
     private final List<Integer> adapterList;
