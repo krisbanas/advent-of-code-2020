@@ -1,4 +1,4 @@
-package com.github.krisbanas.solutions;
+package com.github.krisbanas.solutions.day1;
 
 import java.util.Collections;
 import java.util.List;
